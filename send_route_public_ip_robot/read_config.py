@@ -1,6 +1,7 @@
 import os
 import shutil
-from typing import Dict, Optional
+from pprint import pprint
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -9,29 +10,30 @@ from send_route_public_ip_robot.utils.base import PACKAGE_SHARE_DIR_NAME, PACKAG
 from send_route_public_ip_robot import LOG
 
 config_path = '/etc/chaoshen/send-route-public-ip-robot.ini'
-config_file_name = 'send-route-public-ip-robot'
+config_file_name = 'send-route-public-ip-robot.ini'
 
 user_config_path = os.path.abspath(os.path.join(common.get_chaoshen_user_config_dir(), config_file_name))
 
 
 class UserConfigModel(BaseModel):
-    class RouteSection(BaseModel):
+    class _RouteSection(BaseModel):
+        whoami: str
         device: str
         ip: str
         username: str
         password: str
 
-    class WebhookSection(BaseModel):
+    class _WebhookSection(BaseModel):
         dingtalk: Optional[str]
         wechat: Optional[str]
 
-    class ResultSection(BaseModel):
+    class _ResultSection(BaseModel):
         public_ip: Optional[str]
         change_time: Optional[str]
 
-    route: RouteSection
-    webhook: WebhookSection
-    result: ResultSection
+    route: _RouteSection
+    webhook: _WebhookSection
+    result: _ResultSection
 
 
 def get_default_config_path():
@@ -40,7 +42,7 @@ def get_default_config_path():
     return os.path.abspath(os.path.join(base_path, then_path))
 
 
-def get_config() -> UserConfigModel:
+def get_user_config() -> UserConfigModel:
     default_config_path = get_default_config_path()
     if not os.path.exists(default_config_path):
         raise Exception(f"not find default network config, config_path={default_config_path}")
@@ -48,12 +50,17 @@ def get_config() -> UserConfigModel:
     if not os.path.exists(user_config_path):
         LOG.info('not exist user network config, copy it from default')
         shutil.copy(default_config_path, user_config_path)
+    LOG.info(f'read config file {user_config_path}')
     user_config = file.ini_to_dict(user_config_path)
     LOG.debug(f"user config is {user_config}")
-    # network_config = {key: network.UserConfigNetworkFileModel(**value) for key, value in network_config.items()}
     user_config_model = UserConfigModel(**user_config)
     return user_config_model
 
 
+def main():
+    data = get_user_config()
+    pprint(data.dict())
+
+
 if __name__ == '__main__':
-    get_config()
+    main()
