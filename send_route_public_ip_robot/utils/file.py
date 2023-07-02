@@ -46,3 +46,16 @@ def ini_to_dict(file_path):
             value = config.get(section, option)
             ini_dict[section][option] = value
     return ini_dict
+
+
+def dict_to_ini(dict_data):
+    config = configparser.ConfigParser()
+    for section in dict_data:
+        config[section] = dict_data[section]
+    return config
+
+
+def write_ini(dict_data, file_path):
+    config = dict_to_ini(dict_data)
+    with open(file_path, 'w') as f:
+        config.write(f)

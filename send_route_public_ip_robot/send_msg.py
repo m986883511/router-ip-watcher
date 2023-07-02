@@ -1,20 +1,22 @@
 import requests
 
 from send_route_public_ip_robot import read_config
-from send_route_public_ip_robot import LOG
+from send_route_public_ip_robot import LOG, model
 
-def fun(webhook):
+
+def send_robot(webhook, data: model.UserConfigModel):
     url = webhook
     header = {'Content-Type': 'application/json'}
     body = {
         "msgtype": "text",
         "text": {
-            "content": "路由器ip变更为180.5.5.5"
+            # "content": f"路由器公网ip变化\n{json.dumps(data, indent=4)}"
+            "content": f"{data.route.whoami}您的{data.route.device}路由器，"
+                       f"在{data.result.change_time}公网ip变化为{data.result.public_ip}"
         }
     }
-    # 注意：json=mBody  必须用json
     res = requests.post(url=url, json=body, headers=header)
-    LOG.info(f"send url={webhook} result is {res.status_code}")
+    LOG.info(f"send url={webhook}, body={body}, status_code={res.status_code}")
 
 
 def main():
@@ -22,7 +24,7 @@ def main():
     robot_config = user_config.webhook
     for name, webhook in robot_config.dict().items():
         if webhook:
-            fun(webhook)
+            send_robot(webhook, user_config)
 
 
 if __name__ == '__main__':

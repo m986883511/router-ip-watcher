@@ -1,0 +1,39 @@
+#!/bin/bash
+# this a script to create/stop/status/start linux service
+# by: chaoshen
+# date: 2022-10-20
+
+service_name='send-route-public-ip-robot'
+
+function usage() {
+  echo "Usage: $0 create | stop | status | stop | restart"
+  exit 1
+}
+
+# check have param
+if [ $# -lt 1 ];then
+  usage
+fi
+
+# check param length is not 1
+if [ $# -ne 1 ];then
+  usage
+fi
+
+# check param is create
+if [ "$1" == "create" ];then
+  python -c "from send_route_public_ip_robot.utils import linux;linux.LinuxService('$service_name', 'cs-run-send-route-public-ip-robot').create_service_file()"
+  systemctl status $service_name
+elif [ "$1" == "stop" ]; then
+  systemctl stop $service_name
+elif [ "$1" == "status" ]; then
+  systemctl status $service_name
+elif [ "$1" == "start" ]; then
+  systemctl start $service_name
+  systemctl status $service_name
+elif [ "$1" == "restart" ]; then
+  systemctl restart $service_name
+  systemctl status $service_name
+else
+  usage
+fi

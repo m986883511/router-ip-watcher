@@ -1,16 +1,16 @@
 import os
 import subprocess
 import logging
-
 import platform
 import importlib
 import importlib.util
 import sys
-from typing import List
+from datetime import datetime
+from datetime import timedelta
+from datetime import timezone
 
 from send_route_public_ip_robot.utils import my_decorator
 from send_route_public_ip_robot.utils import base
-
 
 LOG = logging.getLogger(__name__)
 
@@ -98,7 +98,10 @@ def get_python_path():
 
 def get_current_python_share_path():
     python_path = get_python_path()
-    share_path = os.path.join(python_path, '../share')
+    if python_path.startswith('/usr/bin'):
+        share_path = '/usr/local/share'
+    else:
+        share_path = os.path.join(python_path, '../share')
     return share_path
 
 
@@ -123,5 +126,13 @@ def get_tool_platform_script_path():
         return os.path.abspath(installed_platform_scripts_dir)
 
 
+def get_beijing_time():
+    utc_now = datetime.utcnow().replace(tzinfo=timezone.utc)
+    shanghai_tz = timezone(timedelta(hours=8), name='Asia/Shanghai')
+    beijing_now = utc_now.astimezone(shanghai_tz)
+    return f"{beijing_now.date()} {beijing_now.strftime('%H:%M:%S')}"
+
+
 if __name__ == '__main__':
     print(get_tool_platform_script_path())
+    print(get_beijing_time())
