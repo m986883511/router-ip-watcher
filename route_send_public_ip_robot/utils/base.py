@@ -4,7 +4,7 @@ from enum import Enum
 USER_CONFIG_DIR_NAME = '.chaoshen'
 # 包安装的时候会自动将一些文件放在python环境的share目录
 PACKAGE_SHARE_DIR_NAME = 'chaoshen-toolbox'
-PACKAGE_NAME = 'send_route_public_ip_robot'
+PACKAGE_NAME = 'route_send_public_ip_robot'
 
 
 class Platform(Enum):

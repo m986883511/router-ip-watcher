@@ -1,7 +1,7 @@
 import requests
 
-from send_route_public_ip_robot import read_config
-from send_route_public_ip_robot import LOG, model
+from route_send_public_ip_robot import read_config
+from route_send_public_ip_robot import LOG, model
 
 
 def send_robot(webhook, data: model.UserConfigModel):
@@ -10,7 +10,6 @@ def send_robot(webhook, data: model.UserConfigModel):
     body = {
         "msgtype": "text",
         "text": {
-            # "content": f"路由器公网ip变化\n{json.dumps(data, indent=4)}"
             "content": f"{data.route.whoami}您的{data.route.device}路由器，"
                        f"在{data.result.change_time}公网ip变化为{data.result.public_ip}"
         }

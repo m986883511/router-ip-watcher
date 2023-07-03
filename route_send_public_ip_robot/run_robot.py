@@ -1,7 +1,7 @@
 import time
 
-from send_route_public_ip_robot import LOG, read_config, calc_public_ip, send_msg
-from send_route_public_ip_robot.utils import common, file
+from route_send_public_ip_robot import LOG, read_config, calc_public_ip, send_msg
+from route_send_public_ip_robot.utils import common
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
                     LOG.info(f'public ip change to {public_ip}')
                 time.sleep(interval)
         except Exception as e:
-            LOG.exception(f"get cookie failed, wait 60 seconds to restart, err={str(e)}")
+            LOG.exception(f"get route login cookie failed, wait 60 seconds to retry, err={str(e)}")
             time.sleep(60)
 
 

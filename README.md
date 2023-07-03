@@ -1,4 +1,4 @@
-# send-route-public-ip-robot
+# route-send-public-ip-robot
 如果路由器的公网ip变化，就将新的公网IP发送到聊天机器人
 
 - [x] 钉钉机器人
@@ -7,7 +7,7 @@
 
 快速安装
 ```shell
-pip install git+https://github.com/m986883511/send-route-public-ip.git
+pip install git+https://github.com/m986883511/route-send-public-ip-robot.git
 # or
-pip install git+https://gitee.com/m986883511/send-route-public-ip.git
+pip install git+https://gitee.com/m986883511/route-send-public-ip-robot.git
 ```

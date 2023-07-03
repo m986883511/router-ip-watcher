@@ -1,7 +1,7 @@
 import requests
 
-from send_route_public_ip_robot import LOG
-from send_route_public_ip_robot import read_config
+from route_send_public_ip_robot import LOG
+from route_send_public_ip_robot import read_config
 
 user_config = read_config.get_user_config()
 
