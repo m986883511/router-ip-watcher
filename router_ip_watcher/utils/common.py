@@ -9,8 +9,8 @@ from datetime import datetime
 from datetime import timedelta
 from datetime import timezone
 
-from route_send_public_ip_robot.utils import my_decorator
-from route_send_public_ip_robot.utils import base
+from router_ip_watcher.utils import my_decorator
+from router_ip_watcher.utils import base
 
 LOG = logging.getLogger(__name__)
 

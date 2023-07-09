@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 class UserConfigModel(BaseModel):
-    class _RouteSection(BaseModel):
+    class _RouterSection(BaseModel):
         whoami: str
         interval: int
         device: str
@@ -20,6 +20,6 @@ class UserConfigModel(BaseModel):
         public_ip: Optional[str]
         change_time: Optional[str]
 
-    route: _RouteSection
+    router: _RouterSection
     webhook: _WebhookSection
     result: _ResultSection

@@ -3,7 +3,7 @@
 # by: chaoshen
 # date: 2022-10-20
 
-service_name='route-send-public-ip-robot'
+service_name='router-ip-watcher'
 
 function usage() {
   echo "Usage: $0 create | stop | status | start"
@@ -22,7 +22,7 @@ fi
 
 # check param is create
 if [ "$1" == "create" ];then
-  python -c "from route_send_public_ip_robot.utils import linux;linux.LinuxService('$service_name', 'cs-route-run-send-public-ip-robot').create_service_file()"
+  python -c "from router_ip_watcher.utils import linux;linux.LinuxService('$service_name', 'cs-router-ip-watcher').create_service_file()"
   systemctl status $service_name
 elif [ "$1" == "stop" ]; then
   systemctl disable $service_name

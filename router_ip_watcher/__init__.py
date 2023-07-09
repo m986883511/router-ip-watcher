@@ -1,6 +1,6 @@
 from loguru import logger
 
-from route_send_public_ip_robot.utils import common
+from router_ip_watcher.utils import common
 
 # logger.debug("That's it, beautiful and simple logging!")
 log_path = common.get_recommended_log_path()

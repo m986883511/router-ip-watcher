@@ -2,12 +2,13 @@ import os
 import shutil
 from pprint import pprint
 
-from route_send_public_ip_robot.utils import common, file
-from route_send_public_ip_robot.utils.base import PACKAGE_SHARE_DIR_NAME, PACKAGE_NAME
-from route_send_public_ip_robot import LOG, model
+from router_ip_watcher.utils import common, file
+from router_ip_watcher.utils.base import PACKAGE_SHARE_DIR_NAME, PACKAGE_NAME
+from router_ip_watcher import LOG, model
 
-config_path = '/etc/chaoshen/route-send-public-ip-robot.ini'
-config_file_name = 'route-send-public-ip-robot.ini'
+
+config_file_name = 'router-ip-watcher.ini'
+config_path = f'/etc/chaoshen/{config_file_name}'
 
 user_config_path = os.path.abspath(os.path.join(common.get_chaoshen_user_config_dir(), config_file_name))
 

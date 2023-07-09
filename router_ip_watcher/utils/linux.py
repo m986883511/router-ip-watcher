@@ -3,7 +3,7 @@ import logging
 
 LOG = logging.getLogger(__name__)
 
-from route_send_public_ip_robot.utils import common, base
+from router_ip_watcher.utils import common, base
 
 
 def check_is_root():

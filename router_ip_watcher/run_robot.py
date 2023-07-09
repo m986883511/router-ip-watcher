@@ -1,14 +1,14 @@
 import time
 
-from route_send_public_ip_robot import LOG, read_config, calc_public_ip, send_msg
-from route_send_public_ip_robot.utils import common
+from router_ip_watcher import LOG, read_config, calc_public_ip, send_msg
+from router_ip_watcher.utils import common
 
 
 def main():
     while True:
         try:
             user_config = read_config.get_user_config()
-            interval = user_config.route.interval
+            interval = user_config.router.interval
             cookie = calc_public_ip.get_cookie()
             LOG.info('start get public ip')
             while True:
@@ -21,7 +21,7 @@ def main():
                     LOG.info(f'public ip change to {public_ip}')
                 time.sleep(interval)
         except Exception as e:
-            LOG.exception(f"get route login cookie failed, wait 60 seconds to retry, err={str(e)}")
+            LOG.exception(f"get router login cookie failed, wait 60 seconds to retry, err={str(e)}")
             time.sleep(60)
 
 
