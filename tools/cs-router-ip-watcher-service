@@ -22,7 +22,7 @@ fi
 
 # check param is create
 if [ "$1" == "create" ];then
-  python -c "from router_ip_watcher.utils import linux;linux.LinuxService('$service_name', 'cs-router-ip-watcher').create_service_file()"
+  python -c "from router_ip_watcher.utils import linux;linux.LinuxService('$service_name', 'router-ip-watcher').create_service_file()"
   systemctl status $service_name
 elif [ "$1" == "stop" ]; then
   systemctl disable $service_name
