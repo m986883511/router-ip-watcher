@@ -22,7 +22,7 @@ def get_cookie():
     return html_set_cookie
 
 
-def get_public_ip(cookie=None):
+def get_wan_ip(cookie=None):
     cookie = cookie or get_cookie()
     url = 'http://{}/cgi-bin/luci/admin/settings/gwinfo?get=part'.format(user_config.router.ip)
     LOG.debug(f'get url {url}')
@@ -33,12 +33,12 @@ def get_public_ip(cookie=None):
         raise Exception(err)
     data = res.json()
     wan_ip = data.get('WANIP')
-    LOG.info(f'public ip is {wan_ip}')
+    LOG.info(f'wan ip is {wan_ip}')
     return wan_ip
 
 
 def main():
-    get_public_ip()
+    get_wan_ip()
 
 
 if __name__ == '__main__':

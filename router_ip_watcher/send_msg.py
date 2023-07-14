@@ -11,7 +11,7 @@ def send_robot(webhook, data: model.UserConfigModel):
         "msgtype": "text",
         "text": {
             "content": f"{data.router.whoami}您的{data.router.device}路由器，"
-                       f"在{data.result.change_time}公网ip变化为{data.result.public_ip}"
+                       f"在{data.result.change_time}公网ip变化为{data.result.wan_ip}"
         }
     }
     res = requests.post(url=url, json=body, headers=header)

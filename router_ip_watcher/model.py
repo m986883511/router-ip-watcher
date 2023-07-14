@@ -17,7 +17,7 @@ class UserConfigModel(BaseModel):
         wechat: Optional[str]
 
     class _ResultSection(BaseModel):
-        public_ip: Optional[str]
+        wan_ip: Optional[str]
         change_time: Optional[str]
 
     router: _RouterSection
